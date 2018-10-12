@@ -2,3 +2,6 @@ $ source venv/bin/activate
 
 #On Windows to activate the virtual environment
 $ venv\Scripts\activate
+
+#After datbase changes
+flask db upgrade

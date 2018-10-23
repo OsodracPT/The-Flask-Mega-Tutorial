@@ -21,3 +21,6 @@ class Config(object):
     POSTS_PER_PAGE = 25
 
     LANGUAGES = ['en', 'es', 'pt']
+
+    #ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    ELASTICSEARCH_URL='http://localhost:9200'

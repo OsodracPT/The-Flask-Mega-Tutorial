@@ -27,6 +27,9 @@ babel = Babel(app)
 app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
 
+from app.api import bp as api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
+
 from app import routes, models, errors
 
 if not app.debug:
@@ -44,6 +47,11 @@ if not app.debug:
             credentials=auth, secure=secure)
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
+    
+        if app.config['LOG_TO_STDOUT']:
+            stream_handler = logging.StreamHandler()
+            stream_handler.setLevel(logging.INFO)
+            app.logger.addHandler(stream_handler)
     
     if not os.path.exists('logs'):
         os.mkdir('logs')
